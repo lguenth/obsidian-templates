@@ -32,7 +32,7 @@ This is a collection of [Obsidian](https://obsidian.md/) templates I use or have
   - Adds the current selection to a "workbench" note as a bullet point with today's date
   - Plugins: Templater, Workbench (optional)
 - [youtube.md](youtube.md)
-  - Gets metadata from a YouTube video and embeds it, works by copying the video ID to the clipboard
+  - Gets metadata from a YouTube video and embeds it, works by copying the video URL to the clipboard & then running the template
   - Plugins: Templater
 - [zettel.md](zettel.md)
   - Basic Zettelkasten template, asks for the type of the Zettel (I differentiate claims from concepts and questions)
