@@ -1,0 +1,73 @@
+/* Original Zotero Highlight Colours */
+/*
+ "#2ea8e5": "blue",
+ "#5fb236": "green",
+ "#a28ae5": "purple",
+ "#ffd400": "yellow",
+ "#ff6666": "red",
+ "#f19837": "orange",
+ "#e56eee": "magenta",
+ "#aaaaaa": "grey"
+*/
+
+/*
+  Info:
+  You may uncomment the first line with .literature-note for each colour 
+  if you want the CSS to only be a applied if a note has the
+  `cssclass: literature-note` in its frontmatter
+*/
+
+
+/* Yellow */
+/* .literature-note  */
+.callout[data-callout-metadata="yellow"] {
+  --callout-color: 255, 212, 0 !important;
+}
+
+/* Red */
+/* .literature-note  */
+.callout[data-callout-metadata="red"] {
+  --callout-color: 255, 102, 102 !important;
+}
+
+/* Orange */
+/* .literature-note  */
+.callout[data-callout-metadata="orange"] {
+  --callout-color: 241, 152, 55 !important;
+}
+
+/* Green */
+/* .literature-note  */
+.callout[data-callout-metadata="green"] {
+  --callout-color: 95, 178, 54 !important;
+}
+
+/* Blue */
+/* .literature-note  */
+.callout[data-callout-metadata="blue"] {
+  --callout-color: 46, 168, 229 !important;
+}
+
+/* Magenta */
+/* .literature-note  */
+.callout[data-callout-metadata="magenta"] {
+  --callout-color: 229, 110, 238 !important;
+}
+
+/* Pink */
+/* .literature-note  */
+.callout[data-callout-metadata="pink"] {
+  --callout-color: 229, 110, 238 !important;
+}
+
+/* Purple */
+/* .literature-note  */
+.callout[data-callout-metadata="purple"] {
+  --callout-color: 162, 138, 229 !important;
+}
+
+/* Grey */
+/* .literature-note  */
+.callout[data-callout-metadata="grey"] {
+  --callout-color: 170, 170, 170 !important;
+}

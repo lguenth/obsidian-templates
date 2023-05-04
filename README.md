@@ -39,4 +39,6 @@ This is a collection of [Obsidian](https://obsidian.md/) templates I use or have
   - Plugins: Templater
 - [zotero.md](zotero.md)
   - Create a literature note from a Zotero item, pulling some metadata and all your PDF annotations
+  - The callouts are styled according to their highlight colour by using this CSS snippet: [litnote-colors.css](css/litnote-colors.css)
+    - Place the file in the `.obsidian/snippets` folder at the base of your vault, then enable through `Settings > Appearance > CSS snippets`.
   - Plugins: Zotero Integration
