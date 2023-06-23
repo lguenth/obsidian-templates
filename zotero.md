@@ -1,11 +1,12 @@
 ---
-tags: {%- if itemType == "book" %}
+tags: {% if itemType == "book" %}
   - 📥/📚{% else %}
   - 📥/📑{% endif %}
 alias: "
     {%- if creators -%}
         {{creators[0].lastName}}
-        {%- if creators|length > 1 %} et al.{% endif -%}
+        {%- if creators|length == 2 %} & {{creators[1].lastName}}{% endif -%}
+        {%- if creators|length > 2 %} et al.{% endif -%}
     {%- endif -%}
     {%- if date %} ({{date | format("YYYY")}}){% endif -%} 
     {%- if shortTitle %} {{shortTitle | safe}} {%- else %} {{title | safe}} {%- endif -%}
@@ -13,20 +14,25 @@ alias: "
 date: {{importDate|format("YYYY-MM-DD")}}
 lastmod: {{importDate|format("YYYY-MM-DD")}}
 ---
-{% if isFirstImport %}
+{#- METADATA AND PERMANENT INDEX -#}
+{#-  This part only gets inserted once -#}
+{#-  You can use this space to take permanent notes, e.g. to create an index or write a summary, or link to other notes #}
+{% persist "notes" %}{% if isFirstImport %}
+
 # {{title}}
 
 ## 📇 Index
 - 
 
-> [!meta]+ Metadaten – {% for attachment in attachments | filterby("path", "endswith", ".pdf") %}[PDF{% if not loop.first %} {{loop.index}}{% endif %}]({{attachment.desktopURI|replace("/select/", "/open-pdf/")}}){% if not loop.last %}, {% endif %}{% endfor %}
+> [!important]+ Metadaten – {% for attachment in attachments | filterby("path", "endswith", ".pdf") %}[PDF{% if not loop.first %} {{loop.index}}{% endif %}]({{attachment.desktopURI|replace("/select/", "/open-pdf/")}}){% if not loop.last %}, {% endif %}{% endfor %}
 > {{bibliography}}
 > 
 > - **Projekte**:: 
 > - **Keywords**:: 
 > - [Zotero öffnen]({{select}})
-> {% endif %}{% persist "annotations" %}
+> {% endif %}{% endpersist %}{% persist "annotations" %}
 
+{#- COLOR VARIABLES -#}
 {%-
     set zoteroColors = {
         "#2ea8e5": "blue",
@@ -45,12 +51,14 @@ lastmod: {{importDate|format("YYYY-MM-DD")}}
         "blue": "⭐ Main",
         "green": "✅ Definition",
         "purple": "🧩 Methodology",
-        "yellow": "📚 Investigate",
-        "red": "⭕ Caveats/Lookup",
+        "yellow": "📚 Further Reading",
+        "red": "⭕ Questions",
+        "magenta": "ℹ Info",
         "other": "Misc"
    }
 -%}
 
+{#- ANNOTATION TYPES -#}
 {%- macro calloutHeader(type) -%}
     {%- switch type -%}
         {%- case "highlight" -%}
@@ -62,6 +70,7 @@ lastmod: {{importDate|format("YYYY-MM-DD")}}
     {%- endswitch -%}
 {%- endmacro %}
 
+{#- SET CUSTOM ANNOTATION COLORS -#}
 {%- set newAnnot = [] -%}
 {%- set newAnnotations = [] -%}
 {%- set annotations = annotations | filterby("date", "dateafter", lastImportDate) %}
@@ -112,10 +121,10 @@ lastmod: {{importDate|format("YYYY-MM-DD")}}
 {%- endif %}
 
 {%- if annot.comment %}
-> **{{annot.comment|nl2br}}**
+> → **{{annot.comment|nl2br}}**
 {%- endif -%}
 
 {%- endfor -%}
 {%- endfor -%}
-{% endif %}
+{% endif -%}
 {% endpersist -%}
