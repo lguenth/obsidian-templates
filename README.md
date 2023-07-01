@@ -1,6 +1,15 @@
 # Obsidian Templates
 
-This is a collection of [Obsidian](https://obsidian.md/) templates I use or have used. Most of these use Templater (and its "Trigger on file creation" feature) but I'll list the plugins used for each one in the [overview below](#overview). You might also need to adjust folder paths and file names used in the Templater scripts. I've translated some metadata field names to English for readability.
+This is a collection of [Obsidian](https://obsidian.md/) templates that I use or have used in the past. Most of them require Templater (and its "Trigger on file creation" feature) but I'll list all plugin dependencies in the [overview below](#overview). You might also need to adjust the folder paths and file names used in the Templater scripts.
+
+## Download
+
+You can download all of the templates by cloning the repository:
+```
+git clone https://github.com/lguenth/obsidian-templates.git
+```
+
+You can also download them individually by clicking on a file in the directory listing above and then using the **Download raw file** button that appears in the top right. Place the files in your vault to start using them.
 
 ## Overview
 
