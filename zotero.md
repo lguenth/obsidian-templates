@@ -1,18 +1,18 @@
 ---
 tags: {% if itemType == "book" %}
-  - 📥/📚{% else %}
-  - 📥/📑{% endif %}
-alias: "
-    {%- if creators -%}
-        {{creators[0].lastName}}
+    - book{% else %}
+    - paper{% endif %}
+title: "{% if creators -%}{{creators[0].lastName}}
         {%- if creators|length == 2 %} & {{creators[1].lastName}}{% endif -%}
         {%- if creators|length > 2 %} et al.{% endif -%}
-    {%- endif -%}
-    {%- if date %} ({{date | format("YYYY")}}){% endif -%} 
-    {%- if shortTitle %} {{shortTitle | safe}} {%- else %} {{title | safe}} {%- endif -%}
-"
-date: {{importDate|format("YYYY-MM-DD")}}
-lastmod: {{importDate|format("YYYY-MM-DD")}}
+        {%- endif -%}
+        {%- if date %} ({{date | format("YYYY")}}){% endif -%}
+        {%- if shortTitle %} {{shortTitle | nl2br}} {%- else %} {{title | nl2br}}
+        {%- endif -%}"
+projekte: {% for tag in  tags %}{% if "📓" in tag.tag %}
+    - "[[{{tag.tag | replace("📓 ", "")}}]]"{% endif %}{% endfor %}
+created: {{importDate|format("YYYY-MM-DD")}}
+modified: {{importDate|format("YYYY-MM-DD")}}
 ---
 {#- METADATA AND PERMANENT INDEX -#}
 {#-  This part only gets inserted once -#}
@@ -24,14 +24,21 @@ lastmod: {{importDate|format("YYYY-MM-DD")}}
 ## 📇 Index
 - 
 
-> [!important]+ Metadaten – {% for attachment in attachments | filterby("path", "endswith", ".pdf") %}[PDF{% if not loop.first %} {{loop.index}}{% endif %}]({{attachment.desktopURI|replace("/select/", "/open-pdf/")}}){% if not loop.last %}, {% endif %}{% endfor %}
+> [!info]+ Metadata – {% for attachment in attachments | filterby("path", "endswith", ".pdf") %}[PDF{% if not loop.first %} {{loop.index}}{% endif %}]({{attachment.desktopURI|replace("/select/", "/open-pdf/")}}){% if not loop.last %}, {% endif %}{% endfor %}
 > {{bibliography}}
 > 
-> - **Projekte**:: 
-> - **Keywords**:: 
-> - [Zotero öffnen]({{select}})
-> {% endif %}{% endpersist %}{% persist "annotations" %}
+> - Keywords: 
+> - Zotero: [Eintrag öffnen]({{select}}){% if relations %}
+> - Related: {% for relation in relations %}{% if relation.citekey %}[[@{{relation.citekey}}]]{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}{% endif %}
 
+> [!example]- Abstract
+> *{{abstractNote | nl2br}}*
+ 
+> [!important]- Summary
+> 
+> {% endif %}{% endpersist %}
+
+{#- WARNING: Everything below this line will get overwritten on re-import! -#}
 {#- COLOR VARIABLES -#}
 {%-
     set zoteroColors = {
@@ -53,7 +60,7 @@ lastmod: {{importDate|format("YYYY-MM-DD")}}
         "purple": "🧩 Methodology",
         "yellow": "📚 Further Reading",
         "red": "⭕ Questions",
-        "magenta": "ℹ Info",
+        "magenta": "📎 Info",
         "other": "Misc"
    }
 -%}
@@ -75,8 +82,7 @@ lastmod: {{importDate|format("YYYY-MM-DD")}}
 {%- set newAnnotations = [] -%}
 {%- set annotations = annotations | filterby("date", "dateafter", lastImportDate) %}
 
-{% if annotations.length > 0 %}
-*Imported: {{importDate | format("YYYY-MM-DD HH:mm")}}*
+{% if annotations.length > 0 %}*Imported: {{importDate | format("YYYY-MM-DD HH:mm")}}*
 
 {%- for annot in annotations -%}
 
@@ -127,4 +133,3 @@ lastmod: {{importDate|format("YYYY-MM-DD")}}
 {%- endfor -%}
 {%- endfor -%}
 {% endif -%}
-{% endpersist -%}
