@@ -2,6 +2,9 @@
 
 This is a collection of [Obsidian](https://obsidian.md/) templates that I use or have used in the past. Most of them require Templater (and its "Trigger on file creation" feature) but I'll list all plugin dependencies in the [overview below](#overview). You might also need to adjust the folder paths and file names used in the Templater scripts.
 
+> [!NOTE]
+> As you can see from my commit history, most of these haven't been updated in a while and might be broken. I will probably update them at some point but, in the meantime, feel free to reach out to the [Obsidian community](https://obsidian.md/community) in the forum or on Discord.
+
 ## Download
 
 You can download all of the templates by cloning the repository:
